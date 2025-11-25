@@ -31,5 +31,10 @@ public class MessageClient {
 		
 		//Print out the message from the message object.
 		System.out.println(message.message());
+		
+		System.out.println(message);
+		System.out.println(ms);
+		System.out.println(ms instanceof MessageService);
+		System.out.println(ms.getClass().getName());
 	}
 }
