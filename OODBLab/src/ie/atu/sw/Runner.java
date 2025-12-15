@@ -99,9 +99,30 @@ public class Runner {
 		   .map(n -> String.format( "%s=>%s", n.getName(), n.getStatus())) //Format a string for output
 		   .forEach(out::println); //Output key-value pairs
 		
+		/*
+		 * The following queries are completed based off the assignments requirements:
+		 */
 		
-		//Exercises
-		//...
+		//Query 10: Show all Customers with a status of RECURRING
+		out.println("\n[Query 10] Show all Customers with a status of RECURRING");
+		root.stream()
+	    .filter(c -> c.getStatus() == CustomerStatus.RECURRING)
+	    .forEach(out::println);
+		
+		//Query 11: Show all Orders with a value of more than 1000
+		out.println("[Query 11] Show all Orders with a value of more than 1000");
+		root.stream()
+	    .flatMap(c -> c.orders().stream())        // flatten all customer orders
+	    .filter(o -> o.count() > 1000)         // filter by order value
+	    .forEach(out::println);
+		
+		//Query 12: Show all Order Items that start with an Order Number of 'QB-10'
+		out.println("\n[Query 12] Show all Order Items whose Order Number starts with QB-10");
+		root.stream()
+		    .flatMap(c -> c.orders().stream())      
+		    .flatMap(o -> Arrays.stream(o.items())) 
+		    .filter(i -> i.number().startsWith("QB-10"))
+		    .forEach(out::println);
 	}
 	
 	public void update() {
